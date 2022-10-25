@@ -1,0 +1,3 @@
+2022-10-04 00:41:11,767 INFO c.f.m.MdmsApplication [restartedMain] Starting MdmsApplication on LAPTOP-3T4OOPLE with PID 668 (D:\latest eclipse\mdms\target\classes started by Vikky in D:\latest eclipse\mdms)
+2022-10-04 00:41:11,774 DEBUG c.f.m.MdmsApplication [restartedMain] Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE
+2022-10-04 00:41:11,776 INFO c.f.m.MdmsApplication [restartedMain] No active profile set, falling back to default profiles: default
