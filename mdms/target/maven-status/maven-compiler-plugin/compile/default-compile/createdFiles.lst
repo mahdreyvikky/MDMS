@@ -2,6 +2,7 @@ com\fluentgrid\mdms\vo\RequestM.class
 com\fluentgrid\mdms\utils\OtherFunctions.class
 com\fluentgrid\mdms\vo\MdmThresholdM.class
 com\fluentgrid\mdms\vo\CommandConfiguration.class
+com\fluentgrid\mdms\vo\CategoryMaster.class
 com\fluentgrid\mdms\vo\ManualEntryTableHisVO.class
 com\fluentgrid\mdms\vo\MdmThresholdCodeM.class
 com\fluentgrid\mdms\utils\JsonUtil.class
@@ -22,6 +23,7 @@ com\fluentgrid\mdms\vo\NetworkHierarchy.class
 com\fluentgrid\mdms\service\AlarmReportService.class
 com\fluentgrid\mdms\vo\LoadPatternConfigurations.class
 com\fluentgrid\mdms\vo\TodPeriodConfigM.class
+com\fluentgrid\mdms\dao\CategoryMasterDao.class
 com\fluentgrid\mdms\utils\DateUtil.class
 com\fluentgrid\mdms\vo\NotificationLog.class
 com\fluentgrid\mdms\vo\EventMaster.class

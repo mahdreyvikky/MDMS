@@ -105,15 +105,6 @@ public class AlarmMaster {
 	@OneToMany(mappedBy="alarmMaster")
 	private java.util.List<AlarmNotification> alarmNotification;
 	
-	/*
-	//bi-directional many-to-one association to MeterMaster
-	@OneToMany(mappedBy="alarmMaster1")
-	private java.util.List<AlarmNotification> alarmNotification;	
-	
-	//bi-directional one-to-many association to AlarmDetails
-	@OneToMany(mappedBy="alarmMaster2")
-	private java.util.List<AlarmDetails> alarmDetails;
-	*/
 	public AlarmMaster() {
 		
 	}

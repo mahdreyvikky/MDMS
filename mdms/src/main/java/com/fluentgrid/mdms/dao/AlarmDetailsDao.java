@@ -40,12 +40,14 @@ public interface AlarmDetailsDao extends JpaRepository<AlarmDetails, Serializabl
 	List<Object[]> getAlarmReport(@Param("alarmName") String alarmName, @Param("fromDate") Date fromDate, @Param("toDate") Date toDate);
 
 	@Query("Select om.officeName, net.ssName, net.feederName, net.dtrName, net.meterNumber, net.customerAccountNo, "
-			+ "net.customerName, net.consMaxDmd, net.loadUnit, ad.alarmInformation, am.alarmName, ad.alarmDate  From AlarmDetails ad, MdmNetworkHierarchy net, AlarmMaster am, "
-			+ "OfficeMaster om, CategoryMaster cg, cg.name  where ad.alarmDate between :fromDate "
+			+ "net.customerName, net.consMaxDmd, net.loadUnit, ad.alarmInformation, am.alarmName, ad.alarmDate, "
+			+ "cg.name  From AlarmDetails ad, MdmNetworkHierarchy net, AlarmMaster am, "
+			+ "OfficeMaster om, CategoryMaster cg, MeterManufacturer mm, MeterMakeM mmm  where ad.alarmDate between :fromDate "
 			+ "and :toDate and ad.recordStatus = 1 and net.meterNumber = ad.meterId and net.recordStatus = 1 "
 			+ "and net.elementType = 'C' and am.id = ad.alarmId "
 			+ "and (am.alarmName=:alarmName OR 'ALL'=:alarmName) and am.recordStatus = 1 "
 			+ "and om.id = net.administrativeId and om.recordStatus = 1 and cg.id = net.categoryId "
+			+ "and mm.id=mmm.mtrManfactureId "
 			+ "ORDER BY net.meterNumber, am.alarmName, ad.alarmDate DESC")
 	List<Object[]> getAlarmDetails(@Param("alarmName") String alarmName, @Param("fromDate") Date fromDate,
 			@Param("toDate") Date toDate);

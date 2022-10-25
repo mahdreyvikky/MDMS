@@ -204,11 +204,7 @@ public class MdmNetworkHierarchy implements Serializable {
 
 	@Column(name="VT_RATIO_NUMERATOR")
 	private BigDecimal vtRatioNumerator;
-	
-	/*
-	//bi-directional one-to-many association to MdmNetworkHierarchy
-	@OneToMany(mappedBy="mdmNetworkHierarchy")
-	private java.util.List<AlarmDetails> alarmDetails;*/
+
 
 	public MdmNetworkHierarchy() {
 	}
