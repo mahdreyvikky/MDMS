@@ -177,8 +177,8 @@ public class MeterMaster {
 	@Column(name="MAC_ADDRESS")
 	private String macAddress;
 	
-	@Column(name="IS_NOTIFIED")
-	private int IS_NOTIFIED;		
+	/*@Column(name="IS_NOTIFIED" , nullable=false)
+	private int isNotified=1;*/	
 		
 	@Column(name="RECORD_STATUS", nullable=false)
 	private int recordStatus=1;
@@ -674,14 +674,6 @@ public class MeterMaster {
 
 	public void setMacAddress(String macAddress) {
 		this.macAddress = macAddress;
-	}
-
-	public int getIS_NOTIFIED() {
-		return IS_NOTIFIED;
-	}
-
-	public void setIS_NOTIFIED(int iS_NOTIFIED) {
-		IS_NOTIFIED = iS_NOTIFIED;
 	}
 
 	public int getRecordStatus() {

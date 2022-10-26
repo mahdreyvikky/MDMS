@@ -25,6 +25,8 @@ D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\RechargeUpdate.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\constants\AppConstant.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\dao\RequestTypeMDao.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\ManualEntryTableHisVO.java
+D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\MeterMaster.java
+D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\MeterMakeM.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\dao\AlarmDetailsDao.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\utils\DateUtil.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\dao\MdmNetworkHierarchyDao.java
@@ -70,6 +72,7 @@ D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\AlarmNotification.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\CategoryMaster.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\TouWeekMtrConfigM.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\AlarmMaster.java
+D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\MeterManufacturer.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\TouWeekTemp.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\VirtualMeterConfig.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\CommandGroupConfiguration.java

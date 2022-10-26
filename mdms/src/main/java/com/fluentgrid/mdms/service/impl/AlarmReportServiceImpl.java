@@ -95,17 +95,13 @@ public class AlarmReportServiceImpl implements AlarmReportService {
 		logger.info("AlarmReportServiceImpl getAlarmDetails...");
 		Date fDate = DateUtil.convertStringToDate(fromDate, "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm:ss");
 		Date tDate = DateUtil.convertStringToDate(toDate, "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm:ss");
-
-		//List<OfficeMaster> officeMaster = officeMasterDao.getOfficeNameFrmOfficeMaster();
 		
-		/*
-		 * if (officeMaster != null && !officeMaster.isEmpty()) {
-		 * logger.info("officeMaster result = " + officeMaster.size()); }
-		 */
-
-		List<CategoryMaster> categoryMaster = categoryMasterDao.getMeterCategoryFromCategoryMaster();		
-		if (categoryMaster != null && !categoryMaster.isEmpty()) {
-			logger.info("categoryMaster result = " + categoryMaster.size());
+		//Testing Prosepective
+		
+		List<AlarmDetails> alarmReportsTestTwo = alarmDetailsDao.getAlarmDetailsTestTwo(alarmName, fDate, tDate);
+		
+		if(alarmReportsTestTwo!=null && !alarmReportsTestTwo.isEmpty()) {
+			logger.info("alarmReportsTestTwo size..."+alarmReportsTestTwo.size());
 		}
 
 		List<AlarmReportDto> dtoList = null;
@@ -114,20 +110,20 @@ public class AlarmReportServiceImpl implements AlarmReportService {
 		for (Object[] ar : alarmReports) {
 			AlarmReportDto dto = null;
 			dto = new AlarmReportDto();
-			AlarmDetails ad = (AlarmDetails) ar[0];
-			MdmNetworkHierarchy net = (MdmNetworkHierarchy) ar[1];
-			AlarmMaster am =(AlarmMaster) ar[2];
-			
-			
-			//dto.setOfficeName(ar[0].toString());
-			dto.setSsName(net.getSsName());
-			dto.setFeederName(net.getFeederName());
-			dto.setDtrName(net.getDtrName());
-			dto.setMeterumber(net.getMeterNumber());
-			dto.setCustomerAccountNo(net.getCustomerAccountNo());
-			dto.setCustomerName(net.getCustomerName());
-			dto.setAlarmInformation(ad.getAlarmInformation());
-			dto.setAlaramName(am.getAlarmName());			
+			dto.setOfficeName(ar[0].toString());
+			dto.setSsName(ar[1].toString());
+			dto.setFeederName(ar[2].toString());
+			dto.setDtrName(ar[3].toString());
+			dto.setMeterumber(ar[4].toString());
+			dto.setCustomerAccountNo(ar[5].toString());
+			dto.setCustomerName(ar[6].toString());
+			// dto.setContractedLoad(ar[7].toString());
+			dto.setAlarmInformation(ar[9].toString());
+			dto.setAlaramName(ar[10].toString());
+			// dto.setAlarmDate(ar[10].toString());
+			dto.setMeterCategory(ar[12].toString());
+			// dto.setMeterManufacture("");
+			dto.setMeterType(ar[15].toString());
 			dtoList.add(dto);
 
 		}

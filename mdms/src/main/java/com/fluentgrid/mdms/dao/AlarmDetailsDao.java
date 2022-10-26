@@ -48,18 +48,33 @@ public interface AlarmDetailsDao extends JpaRepository<AlarmDetails, Serializabl
 			+ "and (am.alarmName=:alarmName OR 'ALL'=:alarmName) and am.recordStatus = 1 "
 			+ "and om.id = net.administrativeId and om.recordStatus = 1 and cg.id = net.categoryId "
 			+ "and mf.id=mk.mtrManfactureId and mm.mtrMake=mk.id and mm.mtrNumber=net.meterNumber "
-			+ "and mk.record_status=1 and mf.record_status=1 and mm.record_status=1 "
+			+ "and mk.recordStatus=1 and mf.recordStatus=1 "
 			+ "ORDER BY net.meterNumber, am.alarmName, ad.alarmDate DESC")
 	List<Object[]> getAlarmDetails(@Param("alarmName") String alarmName, @Param("fromDate") Date fromDate,
 			@Param("toDate") Date toDate);
 	
 	
-	/*@Query("From AlarmDetails ad, MdmNetworkHierarchy net, AlarmMaster am where ad.alarmDate between :fromDate "
+	@Query("Select om.officeName, net.ssName, net.feederName, net.dtrName, net.meterNumber, net.customerAccountNo, "
+			+ "net.customerName, net.consMaxDmd, net.loadUnit, ad.alarmInformation, am.alarmName, ad.alarmDate, "
+			+ "cg.name, mf.code, mk.make, net.meterType From AlarmDetails ad, MdmNetworkHierarchy net, AlarmMaster am, "
+			+ "OfficeMaster om, CategoryMaster cg, MeterManufacturer mf, MeterMakeM mk, MeterMaster mm where ad.alarmDate between :fromDate "
 			+ "and :toDate and ad.recordStatus = 1 and net.meterNumber = ad.meterId and net.recordStatus = 1 "
 			+ "and net.elementType = 'C' and am.id = ad.alarmId "
 			+ "and (am.alarmName=:alarmName OR 'ALL'=:alarmName) and am.recordStatus = 1 "
+			+ "and om.id = net.administrativeId and om.recordStatus = 1 and cg.id = net.categoryId "
+			+ "and mf.id=mk.mtrManfactureId and mm.mtrMake=mk.id and mm.mtrNumber=net.meterNumber "
+			+ "and mk.recordStatus=1 and mf.recordStatus=1 and mm.recordStatus=1 "
 			+ "ORDER BY net.meterNumber, am.alarmName, ad.alarmDate DESC")
-	List<AlarmDetails> getAlarmDetails(@Param("alarmName") String alarmName, @Param("fromDate") Date fromDate,
-			@Param("toDate") Date toDate);*/
+	List<Object[]> getAlarmDetailsTest(@Param("alarmName") String alarmName, @Param("fromDate") Date fromDate,
+			@Param("toDate") Date toDate);
+	
+	
+	@Query("From AlarmDetails ad, MdmNetworkHierarchy net, AlarmMaster am, MeterMaster mm where ad.alarmDate between :fromDate "
+			+ "and :toDate and ad.recordStatus = 1 and net.meterNumber = ad.meterId and net.recordStatus = 1 "
+			+ "and net.elementType = 'C' and am.id = ad.alarmId "
+			+ "and (am.alarmName=:alarmName OR 'ALL'=:alarmName) and am.recordStatus = 1 and mm.mtrNumber=net.meterNumber "
+			+ "ORDER BY net.meterNumber, am.alarmName, ad.alarmDate DESC")
+	List<AlarmDetails> getAlarmDetailsTestTwo(@Param("alarmName") String alarmName, @Param("fromDate") Date fromDate,
+			@Param("toDate") Date toDate);
 
 }
