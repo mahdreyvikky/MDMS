@@ -454,7 +454,7 @@ public class DateUtil {
 		String formattedTime = "";
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-			SimpleDateFormat output = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+			SimpleDateFormat output = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
 			output.setTimeZone(TimeZone.getTimeZone("IST"));
 			Date d = sdf.parse(date);
 			formattedTime = output.format(d);
@@ -463,6 +463,61 @@ public class DateUtil {
 		}
 		return formattedTime;
 
+	}
+	
+	public static String getDateStringFromStringDate(String date) {
+
+		String formattedTime = "";
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			SimpleDateFormat output = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+			output.setTimeZone(TimeZone.getTimeZone("IST"));
+			Date d = sdf.parse(date);
+			formattedTime = output.format(d);
+			String[] str = formattedTime.split("-");
+			String monthName = getMonthName(str[1]);
+			if(!monthName.isEmpty()) {
+				formattedTime = str[0]+"-"+monthName+"-"+str[2];	
+			}
+			
+			
+		} catch (Exception e) {
+			logger.error("error in Timestamp", e);
+		}
+		return formattedTime;
+
+	}
+	
+	public static String getMonthName(String str) {
+		
+		if(str.equals("01")) {
+			return "Jan";
+		}else if(str.equals("02")) {
+			return "Feb";
+		}else if(str.equals("03")) {
+			return "Mar";
+		}else if(str.equals("04")) {
+			return "Apr";
+		}else if(str.equals("05")) {
+			return "May";
+		}else if(str.equals("06")) {
+			return "Jun";
+		}else if(str.equals("07")) {
+			return "Jul";
+		}else if(str.equals("08")) {
+			return "Aug";
+		}else if(str.equals("09")) {
+			return "Sep";
+		}else if(str.equals("10")) {
+			return "Oct";
+		}else if(str.equals("11")) {
+			return "Num";
+		}else if(str.equals("12")) {
+			return "Dec";
+		}else {
+			return "";
+		}
+		
 	}
 
 }

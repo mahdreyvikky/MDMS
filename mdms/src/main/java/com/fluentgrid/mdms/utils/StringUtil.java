@@ -51,6 +51,13 @@ public class StringUtil {
 		return true;
 	}
 	
+	public static String objectNullChecker(Object obj) {
+		if (obj != null) {
+			return obj.toString();
+		}
+		return "";
+	}
+	
 	/**
 	 * Given the input String, if the string is <b>NOT NULL</b> and <b>NOT EMPTY</b> return true;
 	 * @param inputStr

@@ -60,7 +60,6 @@ public class MdmNetworkHierarchy implements Serializable {
 	@Column(name="CREATE_DATE", nullable=false)
 	private Date createDate;
 
-
 	@Column(name="CREATED_BY")
 	private String createdBy;
 
