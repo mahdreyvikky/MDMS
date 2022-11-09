@@ -65,26 +65,40 @@ public class AlarmReportServiceImpl implements AlarmReportService {
 		List<Object[]> alarmReports = alarmDetailsDao.getAlarmReport(alarmName, fDate, tDate);
 		List<AlarmReportDto> dtoList = null;
 		dtoList = new ArrayList<AlarmReportDto>();
+		
+		logger.info("AlarmReportServiceImpl dtoList size =" + alarmReports.size());
 
-		for (Object[] ar : alarmReports) {
+		/*for (Object[] ar : alarmReports) {
 			AlarmReportDto dto = null;
 			dto = new AlarmReportDto();
-			dto.setOfficeName(ar[0].toString());
-			dto.setSsName(ar[1].toString());
-			dto.setFeederName(ar[2].toString());
-			dto.setDtrName(ar[3].toString());
-			dto.setMeterumber(ar[4].toString());
-			dto.setCustomerAccountNo(ar[5].toString());
-			dto.setCustomerName(ar[6].toString());
-			dto.setContractedLoad(ar[7].toString());
-			dto.setAlarmInformation(ar[8].toString());
-			dto.setAlaramName(ar[9].toString());
-			dto.setAlarmDate(ar[10].toString());
-			dto.setMeterCategory(ar[11].toString());
-			dto.setMeterManufacture("");
-			dto.setMeterType(ar[13].toString());
+			dto.setOfficeName(StringUtil.objectNullChecker(ar[0]));
+			dto.setSsName(StringUtil.objectNullChecker(ar[1]));
+			dto.setFeederName(StringUtil.objectNullChecker(ar[2]));
+			dto.setDtrName(StringUtil.objectNullChecker(ar[3]));
+			dto.setMeterumber(StringUtil.objectNullChecker(ar[4]));
+			dto.setCustomerAccountNo(StringUtil.objectNullChecker(ar[5]));
+			dto.setCustomerName(StringUtil.objectNullChecker(ar[6]));
+			if (!StringUtil.objectNullChecker(ar[7]).isEmpty()) {
+				dto.setContractedLoad(StringUtil.objectNullChecker(ar[7]));
+			}
+			dto.setAlarmInformation(StringUtil.objectNullChecker(ar[8]));
+			dto.setAlaramName(StringUtil.objectNullChecker(ar[9]));
+
+			if (!StringUtil.objectNullChecker(ar[10]).isEmpty()) {
+				dto.setAlarmDate(DateUtil.getDateStringFromStringDate(StringUtil.objectNullChecker(ar[10])));
+			}
+
+			dto.setMeterCategory(StringUtil.objectNullChecker(ar[11]));
+
+			if (!StringUtil.objectNullChecker(ar[12]).isEmpty()) {
+				dto.setMeterManufacture(
+						StringUtil.objectNullChecker(ar[12]));
+			}
+
+			dto.setMeterType(StringUtil.objectNullChecker(ar[13]));
 			dtoList.add(dto);
-		}
+
+		}*/
 
 		logger.info("AlarmReportServiceImpl dtoList size =" + dtoList.size());
 
@@ -98,11 +112,11 @@ public class AlarmReportServiceImpl implements AlarmReportService {
 		Date tDate = DateUtil.convertStringToDate(toDate, "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm:ss");
 
 		// Testing Prospective
-		List<AlarmDetails> alarmReportsTestTwo = alarmDetailsDao.getAlarmDetailsTestTwo(alarmName, fDate, tDate);
+		/*List<AlarmDetails> alarmReportsTestTwo = alarmDetailsDao.getAlarmDetailsTestTwo(alarmName, fDate, tDate);
 
 		if (alarmReportsTestTwo != null && !alarmReportsTestTwo.isEmpty()) {
 			logger.info("alarmReportsTestTwo size..." + alarmReportsTestTwo.size());
-		}
+		}*/
 
 		List<AlarmReportDto> dtoList = null;
 		dtoList = new ArrayList<AlarmReportDto>();

@@ -6,6 +6,7 @@ D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\MdmMeterConfiguration.jav
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\MdmScreenNotify.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\dao\CategoryMasterDao.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\utils\StringUtil.java
+D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\dto\AreawiseAggDailyReportDto.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\dao\OfficeMasterDao.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\utils\StackTraceUtil.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\exceptionhandler\MdmsAppException.java
@@ -31,6 +32,7 @@ D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\dao\AlarmDetailsDao.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\utils\DateUtil.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\dao\MdmNetworkHierarchyDao.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\BalanceUpdate.java
+D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\restcontroller\ReportRestControllerHandler.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\MdmNetworkHierarchy.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\TOUConfM.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\RuleConstraintsVO.java
@@ -46,7 +48,9 @@ D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\TouWeekConfigM.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\CommandConfiguration.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\FepDashboardM.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\EstDataExecuterVO.java
+D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\NetworkAreaAggregation.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\TodMaster.java
+D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\service\AreawiseAggregationDailyReportService.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\EventNotification.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\TouDayZoneConfigM.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\AlarmDetails.java
@@ -57,16 +61,18 @@ D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\NetworkHierarchy.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\HomeDashboardConfigVO.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\service\AlarmReportService.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\TouDayConfigM.java
+D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\service\impl\AreawiseAggregationDailyReportServiceImpl.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\controller\MdmsController.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\MdmThresholdCodeM.java
-D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\restcontroller\MdmRestController.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\TouSeasonTemp.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\MdmOndemand.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\ConsumerGroupDetails.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\TouSeasonConfigM.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\ThresholdMaster.java
+D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\dao\NetworkAreaAggregationDao.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\TouSeasonMtrConfigM.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\controller\CdbController.java
+D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\MdmDateDimension.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\MdmThresholdM.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\AlarmNotification.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\CategoryMaster.java
@@ -79,4 +85,5 @@ D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\CommandGroupConfiguration
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\FepDashboardT.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\dao\AbstractJpaDAO.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\utils\SpringPropertiesUtil.java
+D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\ConsumerNetworkMapping.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\TodPeriodConfigM.java

@@ -32,7 +32,7 @@ public interface AlarmDetailsDao extends JpaRepository<AlarmDetails, Serializabl
 			+ "FROM\r\n"
 			+ "MDMS.MDM_ALARM_dETAILS AD(NOLOCK) \r\n"
 			+ "INNER JOIN MDMS.MDM_NETWORK_HIERARCHY NET(NOLOCK) ON NET.METER_NUMBER=AD.METER_ID AND NET.RECORD_STATUS=1 AND NET.ELEMENT_TYPE='C'\r\n"
-			+ "INNER JOIN MDMS.MDM_ALARM_MASTER AM(NOLOCK) ON AM.ID=AD.ALARM_ID AND AM.RECORD_sTATUS=1 AND AD.RECORD_STATUS=1\r\n"
+			+ "INNER JOIN MDMS.MDM_ALARM_MASTER AM(NOLOCK) ON AM.ID=AD.ALARM_ID AND AM.RECORD_STATUS=1 AND AD.RECORD_STATUS=1\r\n"
 			+ "inner join cdb.meter_master mm (nolock) on mm.mtr_number=net.meter_number \r\n"
 			+ "AND (AM.ALARAM_NAME=?1 OR 'ALL'=?1)\r\n"
 			+ "AND AD.ALARM_DATE BETWEEN ?2 and ?3\r\n"
