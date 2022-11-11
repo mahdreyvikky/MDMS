@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -18,87 +19,104 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
 @Entity
-@Table(name="MDM_ALARM_DETAILS",schema="MDMS")
-@Where(clause="record_status=true")
+@Table(name = "MDM_ALARM_DETAILS", schema = "MDMS")
+@Where(clause = "record_status=true")
 public class AlarmDetails {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-	@Column(name="ID", unique=true, nullable=false, length=50)
+	@GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+	@Column(name = "ID", unique = true, nullable = false, length = 50)
 	private String id;
-		
-	@Column(name="METER_ID")
+
+	@Column(name = "METER_ID")
 	private String meterId;
-	
-	@Column(name="OFFICE_ID")
+
+	@Column(name = "OFFICE_ID")
 	private String officeId;
-		
-	@Column(name="ALARM_DATE")
+
+	@Column(name = "ALARM_DATE")
 	private Date alarmDate;
-	
-	@Column(name="ALARM_INFORMATION")
+
+	@Column(name = "ALARM_INFORMATION")
 	private String alarmInformation;
-	
-	@Column(name="ALARM_STATUS")
+
+	@Column(name = "ALARM_STATUS")
 	private Integer alarmStatus;
-	
-	@Column(name="DISPATCH_STATUS")
+
+	@Column(name = "DISPATCH_STATUS")
 	private Integer dispatchStatus;
-	
-	@Column(name="DISPATCH_TYPE")
+
+	@Column(name = "DISPATCH_TYPE")
 	private Integer dispatchType;
-	
-	@Column(name="DISPATCH_TIME")
+
+	@Column(name = "DISPATCH_TIME")
 	private Date dispatchTime;
-	
-	@Column(name="RECORD_STATUS", nullable=false)
-	private int recordStatus=1;
-	
-	@Column(name="CREATED_BY", length=50)
+
+	@Column(name = "RECORD_STATUS", nullable = false)
+	private int recordStatus = 1;
+
+	@Column(name = "CREATED_BY", length = 50)
 	private String createdBy;
-	
+
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="CREATE_DATE", nullable=false)
+	@Column(name = "CREATE_DATE", nullable = false)
 	private Date createDate;
-	
-	@Column(name="UPDATE_BY", length=50)
+
+	@Column(name = "UPDATE_BY", length = 50)
 	private String updatedBy;
-	
-	@Column(name="UPDATE_DATE")
+
+	@Column(name = "UPDATE_DATE")
 	private Date updateDate;
-	
-	@Column(name="SERVER_IP", nullable=false, length=50)
-	private String serverIp="127.0.0.1";
-	
-	@Column(name="ACKNOWLEDGE")
+
+	@Column(name = "SERVER_IP", nullable = false, length = 50)
+	private String serverIp = "127.0.0.1";
+
+	@Column(name = "ACKNOWLEDGE")
 	private Integer acknowledge;
-	
-	@Column(name="COMMENTS")
+
+	@Column(name = "COMMENTS")
 	private String comments;
-	
-	@Column(name="REQUEST_TIME")
+
+	@Column(name = "REQUEST_TIME")
 	private Date requestTime;
-	
-	@Column(name="RESPONSE_TIME")
+
+	@Column(name = "RESPONSE_TIME")
 	private Date responseTime;
-	
-	@Column(name="FILE_NAME")
+
+	@Column(name = "FILE_NAME")
 	private String fileName;
-	
-	@Column(name="SOURCE_TYPE")
+
+	@Column(name = "SOURCE_TYPE")
 	private String sourceType;
-	
-	@Column(name="NEW_COM_ID")
+
+	@Column(name = "NEW_COM_ID")
 	private String newComId;
+
+	@Column(name = "ALARM_ID")
+	private String alarmId;
+
+	// bi-directional many-to-one association to AlarmMaster
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ALARM_ID",insertable=false, updatable=false)
+	private AlarmMaster alarmMaster2;
+
+	// @JoinColumn(name = "NETWORK_ID")
+
+	// bi-directional many-to-one association to MdmNetworkHierarchy
+	/*@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumns({@JoinColumn(name="NETWORK_ID", referencedColumnName = "NETWORK_ID", insertable = false, updatable = false)
+    }}, foreignKey = @javax.persistence.ForeignKey(name="none",value = ConstraintMode.NO_CONSTRAINT))
+	private MdmNetworkHierarchy mdmNetworkHierarchy;*/
 	
-	@Column(name="ALARM_ID")
-	private String alarmId;	
-	
+	@org.hibernate.annotations.ForeignKey(name = "none")
+    @ManyToOne(fetch = FetchType.LAZY)
+	private MdmNetworkHierarchy mdmNetworkHierarchy;
+
 	public AlarmDetails() {
-		
+
 	}
 
 	public String getId() {
@@ -272,7 +290,7 @@ public class AlarmDetails {
 	public String getNewComId() {
 		return newComId;
 	}
-	
+
 	public void setNewComId(String newComId) {
 		this.newComId = newComId;
 	}
@@ -283,5 +301,5 @@ public class AlarmDetails {
 
 	public void setAlarmId(String alarmId) {
 		this.alarmId = alarmId;
-	}	
+	}
 }

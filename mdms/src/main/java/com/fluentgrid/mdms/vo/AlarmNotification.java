@@ -6,6 +6,7 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -19,128 +20,134 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
 @Entity
-@Table(name="MDMS_ALARAM_NOTIFICATION",schema="MDMS")
-@Where(clause="record_status=true")
-public class AlarmNotification implements Serializable{
-private static final long serialVersionUID = 1L;
-	
+@Table(name = "MDMS_ALARAM_NOTIFICATION", schema = "MDMS")
+@Where(clause = "record_status=true")
+public class AlarmNotification implements Serializable {
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-	@Column(name="ID", unique=true, nullable=false, length=50)
+	@GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+	@Column(name = "ID", unique = true, nullable = false, length = 50)
 	private String id;
-	
+
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="ALARM_ID")
+	@JoinColumn(name = "ALARM_ID")
 	private AlarmMaster alarmMaster;
-	
-	@Column(name="DESIGNATION_ID")
+
+	@Column(name = "DESIGNATION_ID")
 	private String desigId;
-	
-	@Column(name="DESCRIPTION")
+
+	@Column(name = "DESCRIPTION")
 	private String description;
-	
-	@Column(name="NOTIFICATION_REQUIRED")
+
+	@Column(name = "NOTIFICATION_REQUIRED")
 	private String notificationRequired;
 
-	@Column(name="EMAIL_REQUIRED")
+	@Column(name = "EMAIL_REQUIRED")
 	private String emailRequired;
-	
-	@Column(name="SMS_REQUIRED")
+
+	@Column(name = "SMS_REQUIRED")
 	private String smsRequired;
-	
-	@Column(name="CREATED_BY", length=50)
+
+	@Column(name = "CREATED_BY", length = 50)
 	private String createdBy;
-	
+
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="CREATE_DATE", nullable=false)
+	@Column(name = "CREATE_DATE", nullable = false)
 	private Date createDate;
-	
-	@Column(name="UPDATE_BY", length=50)
+
+	@Column(name = "UPDATE_BY", length = 50)
 	private String updateBy;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="UPDATE_DATE" , nullable=false)
+	@Column(name = "UPDATE_DATE", nullable = false)
 	private Date updateDate;
-	
-	@Column(name="SERVER_IP")
-	private String serverIp ="127.0.0.1";
-	
-	@Column(name="NOTIFICATION_TYPE")
+
+	@Column(name = "SERVER_IP")
+	private String serverIp = "127.0.0.1";
+
+	@Column(name = "NOTIFICATION_TYPE")
 	private String notificationType;
-	
-	@Column(name="FLAG1")
+
+	@Column(name = "FLAG1")
 	private String flag1;
-	
-	@Column(name="FLAG2")
+
+	@Column(name = "FLAG2")
 	private String flag2;
-	
-	@Column(name="MOBILE_NUMBER")
+
+	@Column(name = "MOBILE_NUMBER")
 	private String mobileNo;
-	
-	@Column(name="EMAIL_ID")
+
+	@Column(name = "EMAIL_ID")
 	private String emailId;
-	
-	@Column(name="PROVISION_TIME")
+
+	@Column(name = "PROVISION_TIME")
 	private String provisionTime;
-	
-	@Column(name="DISPATCH_INTERVAL")
+
+	@Column(name = "DISPATCH_INTERVAL")
 	private String dispatchInterval;
-	
-	@Column(name="DISPATCH_PATTERN")
+
+	@Column(name = "DISPATCH_PATTERN")
 	private String dispatchPattern;
-	
-	@Column(name="ON_SCN_NOTIFY")
+
+	@Column(name = "ON_SCN_NOTIFY")
 	private String onScnNotify;
-	
-	@Column(name="EMAILDISPATCH_PATTERN")
+
+	@Column(name = "EMAILDISPATCH_PATTERN")
 	private String emailDispatchPattern;
-	
-	@Column(name="EMAILDISPATCH_INTERVAL")
+
+	@Column(name = "EMAILDISPATCH_INTERVAL")
 	private String emailDispatchInterval;
-	
-	@Column(name="SMSDISPATCH_PATTERN")
+
+	@Column(name = "SMSDISPATCH_PATTERN")
 	private String smsDispatchPattern;
-	
-	@Column(name="SMSDISPATCH_INTERVAL")
+
+	@Column(name = "SMSDISPATCH_INTERVAL")
 	private String smsDispatchInterval;
-	
-	@Column(name="RECORD_STATUS" ,nullable=false)
-	private int recordStatus=1;
-	
-	@Column(name="SERVICE_REQUIRED")
+
+	@Column(name = "RECORD_STATUS", nullable = false)
+	private int recordStatus = 1;
+
+	@Column(name = "SERVICE_REQUIRED")
 	private String serviceRequired;
-	
-	@Column(name="REQUESTER_MAIL")
+
+	@Column(name = "REQUESTER_MAIL")
 	private String requesterMail;
-	
-	@Column(name="CC_MAIL")
+
+	@Column(name = "CC_MAIL")
 	private String ccMail;
-	
-	@Column(name="IMPACT")
+
+	@Column(name = "IMPACT")
 	private String impact;
-	
-	@Column(name="PRIORITY")
+
+	@Column(name = "PRIORITY")
 	private String priority;
-	
-	@Column(name="REQUEST_ID")
+
+	@Column(name = "REQUEST_ID")
 	private String requestId;
-	
-	@Column(name="RESPONSE_MESSAGE")
+
+	@Column(name = "RESPONSE_MESSAGE")
 	private String responseMsg;
-	
-	@Column(name="SO_CATEGORY")
+
+	@Column(name = "SO_CATEGORY")
 	private String soCategory;
-	
-	@Column(name="SO_SUBCATEGORY")
+
+	@Column(name = "SO_SUBCATEGORY")
 	private String soSubCategory;
-	
-	@Column(name="COMBINATION_REQUIRED")
+
+	@Column(name = "COMBINATION_REQUIRED")
 	private String combinationRequired;
-	
-	@Column(name="COMBINATION_ALARM_ID")
+
+	@Column(name = "COMBINATION_ALARM_ID")
 	private String combinationAlarmId;
+
+	// bi-directional many-to-one association to AlarmMaster
+	@org.hibernate.annotations.ForeignKey(name = "none")
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "ALARM_ID",insertable=false, updatable=false)
+	private AlarmMaster alarmMaster1;
 
 	public String getId() {
 		return id;
@@ -149,8 +156,6 @@ private static final long serialVersionUID = 1L;
 	public void setId(String id) {
 		this.id = id;
 	}
-
-	
 
 	public String getDesigId() {
 		return desigId;
@@ -439,7 +444,18 @@ private static final long serialVersionUID = 1L;
 	public void setCombinationAlarmId(String combinationAlarmId) {
 		this.combinationAlarmId = combinationAlarmId;
 	}
-	
+
+	public AlarmMaster getAlarmMaster1() {
+		return alarmMaster1;
+	}
+
+	public void setAlarmMaster1(AlarmMaster alarmMaster1) {
+		this.alarmMaster1 = alarmMaster1;
+	}
+
+	public int getRecordStatus() {
+		return recordStatus;
+	}
 	
 	
 

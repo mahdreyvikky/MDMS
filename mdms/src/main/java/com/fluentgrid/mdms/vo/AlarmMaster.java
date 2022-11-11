@@ -16,97 +16,104 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Where;
 
 @Entity
-@Table(name="MDM_ALARM_MASTER",schema="MDMS")
-@Where(clause="record_status=true")
+@Table(name = "MDM_ALARM_MASTER", schema = "MDMS")
+@Where(clause = "record_status=true")
 public class AlarmMaster {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Id
 	@GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
-	@Column(name="ID", unique=true, nullable=false, length=50)
+	@GenericGenerator(name = "uuid2", strategy = "org.hibernate.id.UUIDGenerator")
+	@Column(name = "ID", unique = true, nullable = false, length = 50)
 	private String id;
-		
-	@Column(name="ALARAM_TYPE")
+
+	@Column(name = "ALARAM_TYPE")
 	private String alarmType;
-	
-	@Column(name="ALARAM_CODE")
+
+	@Column(name = "ALARAM_CODE")
 	private String alarmCode;
-	
-	@Column(name="ALARAM_NAME")
+
+	@Column(name = "ALARAM_NAME")
 	private String alarmName;
-	
-	@Column(name="ALARAM_DESCRIPTION")
+
+	@Column(name = "ALARAM_DESCRIPTION")
 	private String alarmDescription;
-	
-	@Column(name="NOTIFICATION_REQUIRED")
+
+	@Column(name = "NOTIFICATION_REQUIRED")
 	private String notificationRequired;
-	
-	@Column(name="EMAIL_REQUIRED")
+
+	@Column(name = "EMAIL_REQUIRED")
 	private String emailRequired;
-	
-	@Column(name="SMS_REQUIRED")
+
+	@Column(name = "SMS_REQUIRED")
 	private String smsRequired;
-	
-	@Column(name="ACKWNOLEDGEMENT_REQUIRED")
+
+	@Column(name = "ACKWNOLEDGEMENT_REQUIRED")
 	private String ackwnoledgementRequired;
-	
-	@Column(name="PROVISION_TIME")
+
+	@Column(name = "PROVISION_TIME")
 	private String provisionTime;
-	
-	@Column(name="AUDIBLE_REQUIRED")
+
+	@Column(name = "AUDIBLE_REQUIRED")
 	private String audibleRequired;
-	
-	@Column(name="EMAILDISPATCH_PATTERN")
+
+	@Column(name = "EMAILDISPATCH_PATTERN")
 	private String emaildispatchPattern;
-	
-	@Column(name="EMAILDISPATCH_INTERVAL")
+
+	@Column(name = "EMAILDISPATCH_INTERVAL")
 	private String emaildispatchIntervel;
-	
-	@Column(name="ON_SCN_NOTIFY")
+
+	@Column(name = "ON_SCN_NOTIFY")
 	private String onScnNotify;
-	
+
 	@CreationTimestamp
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="CREATE_DATE", nullable=false)
+	@Column(name = "CREATE_DATE", nullable = false)
 	private Date createDate;
 
-	@Column(name="CREATED_BY", length=50)
+	@Column(name = "CREATED_BY", length = 50)
 	private String createdBy;
-	
-	@Column(name="RECORD_STATUS", nullable=false)
-	private int recordStatus=1;
 
-	@Column(name="SERVER_IP", nullable=false, length=50)
-	private String serverIp="127.0.0.1";
-	
-	@Column(name="UPDATE_BY", length=50)
+	@Column(name = "RECORD_STATUS", nullable = false)
+	private int recordStatus = 1;
+
+	@Column(name = "SERVER_IP", nullable = false, length = 50)
+	private String serverIp = "127.0.0.1";
+
+	@Column(name = "UPDATE_BY", length = 50)
 	private String updateBy;
 
-	@Column(name="UPDATE_DATE")
+	@Column(name = "UPDATE_DATE")
 	private Date updateDate;
-	
-	@Column(name="EMAIL_ID")
+
+	@Column(name = "EMAIL_ID")
 	private String emailId;
-	
-	@Column(name="MOBILE_NUMBER")
+
+	@Column(name = "MOBILE_NUMBER")
 	private String mobileNumber;
-	
-	@Column(name="NOTIFICATION_TYPE")
+
+	@Column(name = "NOTIFICATION_TYPE")
 	private String notificationType;
-	
-	@Column(name="SMSDISPATCH_PATTERN")
+
+	@Column(name = "SMSDISPATCH_PATTERN")
 	private String smsdispatchPattern;
-	
-	@Column(name="SMSDISPATCH_INTERVAL")
+
+	@Column(name = "SMSDISPATCH_INTERVAL")
 	private String smsdispatchIntervel;
+
 	
-	//bi-directional many-to-one association to MeterMaster
-	@OneToMany(mappedBy="alarmMaster")
+	// bi-directional many-to-one association to MeterMaster
+	@OneToMany(mappedBy = "alarmMaster1")
+	@org.hibernate.annotations.ForeignKey(name = "none")
 	private java.util.List<AlarmNotification> alarmNotification;
-	
+
+	// bi-directional one-to-many association to AlarmDetails
+	@OneToMany(mappedBy = "alarmMaster2")
+	@org.hibernate.annotations.ForeignKey(name = "none")
+	private java.util.List<AlarmDetails> alarmDetails;
+
 	public AlarmMaster() {
-		
+
 	}
 
 	public String getId() {
@@ -308,4 +315,21 @@ public class AlarmMaster {
 	public void setSmsdispatchIntervel(String smsdispatchIntervel) {
 		this.smsdispatchIntervel = smsdispatchIntervel;
 	}
+
+	public java.util.List<AlarmNotification> getAlarmNotification() {
+		return alarmNotification;
+	}
+
+	public void setAlarmNotification(java.util.List<AlarmNotification> alarmNotification) {
+		this.alarmNotification = alarmNotification;
+	}
+
+	public java.util.List<AlarmDetails> getAlarmDetails() {
+		return alarmDetails;
+	}
+
+	public void setAlarmDetails(java.util.List<AlarmDetails> alarmDetails) {
+		this.alarmDetails = alarmDetails;
+	}
+	
 }

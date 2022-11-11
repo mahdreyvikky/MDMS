@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.fluentgrid.mdms.dao.AlarmDetailsDao;
+import com.fluentgrid.mdms.dao.AlarmMasterDao;
 import com.fluentgrid.mdms.dao.CategoryMasterDao;
 import com.fluentgrid.mdms.dao.OfficeMasterDao;
 import com.fluentgrid.mdms.dto.AlarmReportDto;
@@ -29,6 +30,9 @@ public class AlarmReportServiceImpl implements AlarmReportService {
 
 	@Autowired
 	private AlarmDetailsDao alarmDetailsDao;
+	
+	@Autowired
+	private AlarmMasterDao alarmMasterDao;
 
 	@Autowired
 	private OfficeMasterDao officeMasterDao;
@@ -37,22 +41,13 @@ public class AlarmReportServiceImpl implements AlarmReportService {
 	private CategoryMasterDao categoryMasterDao;
 
 	@Override
-	public List<AlarmDetails> fetchAlarmReport(String alarmName, String fromDate, String toDate) {
+	public List<AlarmMaster> fetchAlarmReport(String alarmName, String fromDate, String toDate) {
 		logger.info("AlarmReportServiceImpl fetchAlarmReport...");
 
 		Date fDate = DateUtil.convertStringToDate(fromDate, "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm:ss");
 		Date tDate = DateUtil.convertStringToDate(toDate, "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm:ss");
 
-		List<AlarmDetails> alarmDetails = alarmDetailsDao.getAlarmDetailsByAlarmDateRange(fDate, tDate);
-		if (alarmDetails != null && !alarmDetails.isEmpty()) {
-			for (AlarmDetails ad : alarmDetails) {
-
-			}
-
-			logger.info("AlarmDetails size = " + alarmDetails.size());
-		} else {
-			logger.info("Empty AlarmDetails");
-		}
+		List<AlarmMaster> alarmDetails = alarmMasterDao.getAlarmMasterDetails();
 
 		return alarmDetails;
 	}
@@ -65,40 +60,36 @@ public class AlarmReportServiceImpl implements AlarmReportService {
 		List<Object[]> alarmReports = alarmDetailsDao.getAlarmReport(alarmName, fDate, tDate);
 		List<AlarmReportDto> dtoList = null;
 		dtoList = new ArrayList<AlarmReportDto>();
-		
+
 		logger.info("AlarmReportServiceImpl dtoList size =" + alarmReports.size());
 
-		/*for (Object[] ar : alarmReports) {
-			AlarmReportDto dto = null;
-			dto = new AlarmReportDto();
-			dto.setOfficeName(StringUtil.objectNullChecker(ar[0]));
-			dto.setSsName(StringUtil.objectNullChecker(ar[1]));
-			dto.setFeederName(StringUtil.objectNullChecker(ar[2]));
-			dto.setDtrName(StringUtil.objectNullChecker(ar[3]));
-			dto.setMeterumber(StringUtil.objectNullChecker(ar[4]));
-			dto.setCustomerAccountNo(StringUtil.objectNullChecker(ar[5]));
-			dto.setCustomerName(StringUtil.objectNullChecker(ar[6]));
-			if (!StringUtil.objectNullChecker(ar[7]).isEmpty()) {
-				dto.setContractedLoad(StringUtil.objectNullChecker(ar[7]));
-			}
-			dto.setAlarmInformation(StringUtil.objectNullChecker(ar[8]));
-			dto.setAlaramName(StringUtil.objectNullChecker(ar[9]));
-
-			if (!StringUtil.objectNullChecker(ar[10]).isEmpty()) {
-				dto.setAlarmDate(DateUtil.getDateStringFromStringDate(StringUtil.objectNullChecker(ar[10])));
-			}
-
-			dto.setMeterCategory(StringUtil.objectNullChecker(ar[11]));
-
-			if (!StringUtil.objectNullChecker(ar[12]).isEmpty()) {
-				dto.setMeterManufacture(
-						StringUtil.objectNullChecker(ar[12]));
-			}
-
-			dto.setMeterType(StringUtil.objectNullChecker(ar[13]));
-			dtoList.add(dto);
-
-		}*/
+		/*
+		 * for (Object[] ar : alarmReports) { AlarmReportDto dto = null; dto = new
+		 * AlarmReportDto(); dto.setOfficeName(StringUtil.objectNullChecker(ar[0]));
+		 * dto.setSsName(StringUtil.objectNullChecker(ar[1]));
+		 * dto.setFeederName(StringUtil.objectNullChecker(ar[2]));
+		 * dto.setDtrName(StringUtil.objectNullChecker(ar[3]));
+		 * dto.setMeterumber(StringUtil.objectNullChecker(ar[4]));
+		 * dto.setCustomerAccountNo(StringUtil.objectNullChecker(ar[5]));
+		 * dto.setCustomerName(StringUtil.objectNullChecker(ar[6])); if
+		 * (!StringUtil.objectNullChecker(ar[7]).isEmpty()) {
+		 * dto.setContractedLoad(StringUtil.objectNullChecker(ar[7])); }
+		 * dto.setAlarmInformation(StringUtil.objectNullChecker(ar[8]));
+		 * dto.setAlaramName(StringUtil.objectNullChecker(ar[9]));
+		 * 
+		 * if (!StringUtil.objectNullChecker(ar[10]).isEmpty()) {
+		 * dto.setAlarmDate(DateUtil.getDateStringFromStringDate(StringUtil.
+		 * objectNullChecker(ar[10]))); }
+		 * 
+		 * dto.setMeterCategory(StringUtil.objectNullChecker(ar[11]));
+		 * 
+		 * if (!StringUtil.objectNullChecker(ar[12]).isEmpty()) {
+		 * dto.setMeterManufacture( StringUtil.objectNullChecker(ar[12])); }
+		 * 
+		 * dto.setMeterType(StringUtil.objectNullChecker(ar[13])); dtoList.add(dto);
+		 * 
+		 * }
+		 */
 
 		logger.info("AlarmReportServiceImpl dtoList size =" + dtoList.size());
 
@@ -112,11 +103,13 @@ public class AlarmReportServiceImpl implements AlarmReportService {
 		Date tDate = DateUtil.convertStringToDate(toDate, "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm:ss");
 
 		// Testing Prospective
-		/*List<AlarmDetails> alarmReportsTestTwo = alarmDetailsDao.getAlarmDetailsTestTwo(alarmName, fDate, tDate);
-
-		if (alarmReportsTestTwo != null && !alarmReportsTestTwo.isEmpty()) {
-			logger.info("alarmReportsTestTwo size..." + alarmReportsTestTwo.size());
-		}*/
+		/*
+		 * List<AlarmDetails> alarmReportsTestTwo =
+		 * alarmDetailsDao.getAlarmDetailsTestTwo(alarmName, fDate, tDate);
+		 * 
+		 * if (alarmReportsTestTwo != null && !alarmReportsTestTwo.isEmpty()) {
+		 * logger.info("alarmReportsTestTwo size..." + alarmReportsTestTwo.size()); }
+		 */
 
 		List<AlarmReportDto> dtoList = null;
 		dtoList = new ArrayList<AlarmReportDto>();

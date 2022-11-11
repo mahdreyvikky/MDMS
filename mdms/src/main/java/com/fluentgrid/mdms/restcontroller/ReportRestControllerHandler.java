@@ -24,7 +24,10 @@ import com.fluentgrid.mdms.service.AreawiseAggregationDailyReportService;
 import com.fluentgrid.mdms.service.RequestTypeMService;
 import com.fluentgrid.mdms.utils.JsonUtil;
 import com.fluentgrid.mdms.vo.AlarmDetails;
+import com.fluentgrid.mdms.vo.AlarmMaster;
+import com.fluentgrid.mdms.vo.AlarmNotification;
 import com.fluentgrid.mdms.vo.CategoryMaster;
+import com.fluentgrid.mdms.vo.MdmNetworkHierarchy;
 import com.fluentgrid.mdms.vo.OfficeMaster;
 import com.google.gson.Gson;
 
@@ -92,6 +95,36 @@ public class ReportRestControllerHandler {
 			e.printStackTrace();
 		}
 		return alarmDetails;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@PostMapping(value = "/getAlarmReportWithoutForeignKeyConstraint", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<AlarmNotification> getAlarmReportWithoutForeignKeyConstraint(@RequestBody String request) {
+		logger.info("getAlarmReportWithoutForeignKeyConstraint checker..");
+		List<AlarmNotification> alarmNotification = null;
+
+		try {
+			JSONObject reqJson = null;
+			reqJson = (JSONObject) new JSONParser().parse(request);
+			logger.info("/getAlarmReportWithoutForeignKeyConstraint requster = " + reqJson);			
+			List<AlarmMaster> alarmReport = alarmReportService.fetchAlarmReport(reqJson.get("alarmName").toString(),
+					reqJson.get("fromDate").toString(), reqJson.get("toDate").toString());
+			
+			logger.info("alarmMasterList size.."+alarmReport.size());
+			if(alarmReport!=null && !alarmReport.isEmpty()) {
+				for(AlarmMaster am : alarmReport) {
+					logger.info(am.getId());
+					logger.info("alarmNotificationList size.."+am.getAlarmNotification().size());
+				}
+				alarmNotification = alarmReport.get(0).getAlarmNotification();
+			}
+			
+			logger.info("getAlarmReportWithoutForeignKeyConstraint size.."+alarmReport);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return alarmNotification;
 	}
 
 	@SuppressWarnings("unchecked")
