@@ -151,5 +151,37 @@ public class AlarmReportServiceImpl implements AlarmReportService {
 		return dtoList;
 
 	}
+	
+	
+	@Override
+	public List<AlarmReportDto> getAlarmReport(String alarmName, String fromDate, String toDate) {
+		logger.info("AlarmReportServiceImpl getAlarmDetails...");
+		Date fDate = DateUtil.convertStringToDate(fromDate, "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm:ss");
+		Date tDate = DateUtil.convertStringToDate(toDate, "yyyy-MM-dd HH:mm:ss", "yyyy-MM-dd HH:mm:ss");
+		
+		List<AlarmReportDto> dtoList = null;
+		dtoList = new ArrayList<AlarmReportDto>();
+		List<AlarmDetails> alarmReports = alarmDetailsDao.getAlarmDetailsByAlarmDateRange1(fDate, tDate);
+		for (AlarmDetails ad : alarmReports) {
+			AlarmReportDto dto = null;
+			dto = new AlarmReportDto();
+			dto.setAlarmInformation(ad.getAlarmInformation());
+			dto.setAlarmDate(DateUtil.getDateStringFromDate(ad.getAlarmDate()));
+			dto.setSsName(ad.getMdmNetworkHierarchy().getSsName());
+			dto.setFeederName(ad.getMdmNetworkHierarchy().getFeederName());
+			dto.setDtrName(ad.getMdmNetworkHierarchy().getDtrName());
+			dto.setMeterumber(ad.getMdmNetworkHierarchy().getMeterNumber());
+			dto.setCustomerAccountNo(ad.getMdmNetworkHierarchy().getCustomerAccountNo());
+			dto.setCustomerName(ad.getMdmNetworkHierarchy().getCustomerName());
+			dto.setContractedLoad(ad.getMdmNetworkHierarchy().getConsMaxDmd() + " "+ad.getMdmNetworkHierarchy().getLoadUnit());
+			dtoList.add(dto);
+
+		}
+
+		logger.info("AlarmReportServiceImpl dtoList size =" + dtoList.size());
+
+		return dtoList;
+
+	}
 
 }

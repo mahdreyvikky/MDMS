@@ -12,5 +12,7 @@ public interface AlarmReportService {
 	List<AlarmReportDto> fetchAlarmReportOnNativeSQL(String alarmName, String fromDate, String toDate);
 
 	List<AlarmReportDto> getAlarmDetails(String alarmName, String fromDate, String toDate);
+	
+	List<AlarmReportDto> getAlarmReport(String alarmName, String fromDate, String toDate);
 
 }

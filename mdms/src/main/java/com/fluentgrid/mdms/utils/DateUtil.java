@@ -465,6 +465,21 @@ public class DateUtil {
 
 	}
 	
+	public static String getDateStringFromDate(Date date) {
+
+		String formattedTime = "";
+		try {
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			SimpleDateFormat output = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+			output.setTimeZone(TimeZone.getTimeZone("IST"));
+			formattedTime = output.format(date);
+		} catch (Exception e) {
+			logger.error("error in Timestamp", e);
+		}
+		return formattedTime;
+
+	}
+	
 	public static String getDateStringFromStringDate(String date) {
 
 		String formattedTime = "";

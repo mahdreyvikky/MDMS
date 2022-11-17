@@ -99,6 +99,7 @@ public class AlarmDetails {
 	private String alarmId;
 
 	// bi-directional many-to-one association to AlarmMaster
+	@org.hibernate.annotations.ForeignKey(name = "none")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ALARM_ID",insertable=false, updatable=false)
 	private AlarmMaster alarmMaster2;
@@ -112,7 +113,8 @@ public class AlarmDetails {
 	private MdmNetworkHierarchy mdmNetworkHierarchy;*/
 	
 	@org.hibernate.annotations.ForeignKey(name = "none")
-    @ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "NETWORK_ID",insertable=false, updatable=false)    
 	private MdmNetworkHierarchy mdmNetworkHierarchy;
 
 	public AlarmDetails() {
@@ -302,4 +304,22 @@ public class AlarmDetails {
 	public void setAlarmId(String alarmId) {
 		this.alarmId = alarmId;
 	}
+
+	public AlarmMaster getAlarmMaster2() {
+		return alarmMaster2;
+	}
+
+	public void setAlarmMaster2(AlarmMaster alarmMaster2) {
+		this.alarmMaster2 = alarmMaster2;
+	}
+
+	public MdmNetworkHierarchy getMdmNetworkHierarchy() {
+		return mdmNetworkHierarchy;
+	}
+
+	public void setMdmNetworkHierarchy(MdmNetworkHierarchy mdmNetworkHierarchy) {
+		this.mdmNetworkHierarchy = mdmNetworkHierarchy;
+	}
+	
+	
 }

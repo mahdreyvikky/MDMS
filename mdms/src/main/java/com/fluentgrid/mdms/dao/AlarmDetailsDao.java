@@ -14,8 +14,20 @@ import com.fluentgrid.mdms.vo.AlarmDetails;
 @Repository
 public interface AlarmDetailsDao extends JpaRepository<AlarmDetails, Serializable> {
 
-	@Query("From AlarmDetails ad where ad.alarmDate between :fromDate and :toDate")
-	List<AlarmDetails> getAlarmDetailsByAlarmDateRange(@Param("fromDate") Date fromDate, @Param("toDate") Date toDate);
+	@Query("From AlarmDetails ad where ad.alarmDate between :fromDate and :toDate and  ad.recordStatus = 1 ")
+	List<AlarmDetails> getAlarmDetailsByAlarmDateRange1(@Param("fromDate") Date fromDate, @Param("toDate") Date toDate);
+	
+	
+	@Query("Select net.ssName, net.feederName, net.dtrName, net.meterNumber, net.customerAccountNo, "
+			+ "net.customerName, net.consMaxDmd, net.loadUnit, ad.alarmInformation, am.alarmName, ad.alarmDate "
+			+ "From AlarmDetails ad inner join ad.mdmNetworkHierarchy as net "
+			+ "on ad.meterId = net.meterNumber inner join ad.alarmMaster2 as am on ad.alarmId = am.id where ad.alarmDate between :fromDate "
+			+ "and :toDate and ad.recordStatus = 1 and net.recordStatus = 1 and net.elementType = 'C' "
+			+ "and (am.alarmName=:alarmName OR 'ALL'=:alarmName) and am.recordStatus = 1 "
+			+ "ORDER BY net.meterNumber, am.alarmName, ad.alarmDate DESC")
+	List<Object[]> getAlarmDetailsByAlarmDateRange(@Param("alarmName") String alarmName, @Param("fromDate") Date fromDate,
+			@Param("toDate") Date toDate);
+	
 
 	@Query("From AlarmDetails ad")
 	List<AlarmDetails> fetchAlarmDetails();

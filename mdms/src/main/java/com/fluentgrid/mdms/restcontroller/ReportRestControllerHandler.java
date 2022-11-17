@@ -97,6 +97,27 @@ public class ReportRestControllerHandler {
 		return alarmDetails;
 	}
 	
+	
+	@SuppressWarnings("unchecked")
+	@PostMapping(value = "/getAlarmReports", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<AlarmReportDto> getAlarmReports(@RequestBody String request) {
+		logger.info("getAlarmReport checker..");
+		List<AlarmReportDto> alarmDetails = null;
+
+		try {
+			JSONObject reqJson = null;
+			reqJson = (JSONObject) new JSONParser().parse(request);
+			logger.info("/getAlarmReports requster = " + reqJson);
+
+			alarmDetails = alarmReportService.getAlarmReport(reqJson.get("alarmName").toString(),
+					reqJson.get("fromDate").toString(), reqJson.get("toDate").toString());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return alarmDetails;
+	}
+	
 	@SuppressWarnings("unchecked")
 	@PostMapping(value = "/getAlarmReportWithoutForeignKeyConstraint", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<AlarmNotification> getAlarmReportWithoutForeignKeyConstraint(@RequestBody String request) {
