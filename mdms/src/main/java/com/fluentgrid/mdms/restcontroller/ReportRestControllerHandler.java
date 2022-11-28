@@ -21,6 +21,7 @@ import com.fluentgrid.mdms.dto.AlarmReportDto;
 import com.fluentgrid.mdms.dto.AreawiseAggDailyReportDto;
 import com.fluentgrid.mdms.service.AlarmReportService;
 import com.fluentgrid.mdms.service.AreawiseAggregationDailyReportService;
+import com.fluentgrid.mdms.service.MeterReportService;
 import com.fluentgrid.mdms.service.RequestTypeMService;
 import com.fluentgrid.mdms.utils.JsonUtil;
 import com.fluentgrid.mdms.vo.AlarmDetails;
@@ -45,6 +46,9 @@ public class ReportRestControllerHandler {
 
 	@Autowired
 	private AreawiseAggregationDailyReportService areawiseAggregationDailyReportService;
+	
+	@Autowired
+	private MeterReportService meterReportService;
 
 	@SuppressWarnings("unchecked")
 	@GetMapping(value = "/test", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -174,6 +178,37 @@ public class ReportRestControllerHandler {
 				resultant = JsonUtil.objToJson(areawiseAggDailyReportList);
 			}
 
+			result.put("message", "success");
+			result.put("data", resultant);
+			result.put("responseCode", HttpStatus.OK);
+
+			responseEntity = new ResponseEntity<String>(result.toString(), HttpStatus.OK);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			responseEntity = new ResponseEntity<String>(result.toString(), HttpStatus.EXPECTATION_FAILED);
+		}
+		return responseEntity;
+	}
+	
+	//21st Nov,22
+	@SuppressWarnings("unchecked")
+	@PostMapping(value = "/dailyNetMeteringReport", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> dailyNetMeteringReportHandler(@RequestBody String request) {
+		logger.info("dailyNetMeteringReport checker..");
+		ResponseEntity<String> responseEntity = null;
+		JSONObject result = null;
+		result = new JSONObject();
+		String resultant = "";
+
+		try {
+			JSONObject reqJson = null;
+			reqJson = (JSONObject) new JSONParser().parse(request);
+			logger.info("/dailyNetMeteringReport requster = " + reqJson);
+			
+			List<MdmNetworkHierarchy> mnhList = meterReportService.dailyNetMeteringReport();
+
+		
 			result.put("message", "success");
 			result.put("data", resultant);
 			result.put("responseCode", HttpStatus.OK);

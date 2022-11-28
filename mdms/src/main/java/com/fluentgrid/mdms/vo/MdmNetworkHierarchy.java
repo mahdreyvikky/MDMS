@@ -211,6 +211,10 @@ public class MdmNetworkHierarchy implements Serializable {
 	@OneToMany(mappedBy = "mdmNetworkHierarchy")
 	@org.hibernate.annotations.ForeignKey(name = "none")
 	private java.util.List<AlarmDetails> alarmDetails;
+	
+	@OneToMany(mappedBy = "mdmNetworkHierarchy")
+	@org.hibernate.annotations.ForeignKey(name = "none")
+	private java.util.List<MdmEnergyData> mdmEnergyData;
 
 	public MdmNetworkHierarchy() {
 	}
