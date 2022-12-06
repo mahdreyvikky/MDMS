@@ -29,7 +29,7 @@ public class MeterReportServiceImpl implements MeterReportService {
 
 		List<Object[]> getDailyNetMeteringReportList = mdmNetworkHierarchyDao.getDailyNetMeteringReport(billDate,
 				consType, meteringMode, eneDate, status);
-		logger.debug("getDailyNetMeteringReportList size = " + dailyNetMeteringReportList.size());
+		logger.debug("getDailyNetMeteringReportList size = " + getDailyNetMeteringReportList.size());
 		for (Object[] ar : getDailyNetMeteringReportList) {
 			DailyNetMeteringReportDto dto = null;
 			dto = new DailyNetMeteringReportDto();

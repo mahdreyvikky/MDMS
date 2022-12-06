@@ -68,6 +68,7 @@ D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\controller\MdmsController.ja
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\MdmThresholdCodeM.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\TouSeasonTemp.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\MdmOndemand.java
+D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\dto\DailyNetMeteringReportDto.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\service\MeterReportService.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\ConsumerGroupDetails.java
 D:\MDMS\MDMS\mdms\src\main\java\com\fluentgrid\mdms\vo\TouSeasonConfigM.java

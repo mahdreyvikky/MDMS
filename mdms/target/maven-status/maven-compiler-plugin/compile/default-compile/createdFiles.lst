@@ -15,6 +15,7 @@ com\fluentgrid\mdms\vo\TouDayZoneConfigM.class
 com\fluentgrid\mdms\dao\MdmNetworkHierarchyDao.class
 com\fluentgrid\mdms\vo\MdmServiceOrder.class
 com\fluentgrid\mdms\vo\TouSeasonMtrConfigM.class
+com\fluentgrid\mdms\dto\DailyNetMeteringReportDto.class
 com\fluentgrid\mdms\vo\TouWeekMtrConfigM.class
 com\fluentgrid\mdms\vo\TouDayZoneTemp.class
 com\fluentgrid\mdms\utils\StringUtil.class

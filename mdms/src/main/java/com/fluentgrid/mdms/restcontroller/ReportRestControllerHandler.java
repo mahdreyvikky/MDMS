@@ -200,10 +200,14 @@ public class ReportRestControllerHandler {
 			reqJson = (JSONObject) new JSONParser().parse(request);
 			logger.info("/dailyNetMeteringReport requster = " + reqJson);
 
-			List<DailyNetMeteringReportDto> mnhList = meterReportService.dailyNetMeteringReport(
+			List<DailyNetMeteringReportDto> dailyNetMeteringReportList = meterReportService.dailyNetMeteringReport(
 					reqJson.get("billDate").toString(), reqJson.get("consType").toString(),
 					reqJson.get("meteringMode").toString(), reqJson.get("eneDate").toString(),
 					reqJson.get("status").toString());
+			
+			if (dailyNetMeteringReportList != null && !dailyNetMeteringReportList.isEmpty()) {
+				resultant = JsonUtil.objToJson(dailyNetMeteringReportList);
+			}
 
 			result.put("message", "success");
 			result.put("data", resultant);

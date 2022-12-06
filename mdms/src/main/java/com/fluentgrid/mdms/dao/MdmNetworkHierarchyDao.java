@@ -39,14 +39,14 @@ public interface MdmNetworkHierarchyDao extends JpaRepository<MdmNetworkHierarch
 			+ "ISNULL(AG.KWH_IMP,0) NET_KWH_IMP,CAST(ISNULL(AG.KWH_EXP,0) AS DECIMAL(15,3)) NET_KWH_EXP,NET.CONS_TYPE\r\n"
 			+ ",CASE WHEN EST_FLAG='ORIGINAL' THEN 'ACTUAL' ELSE 'ESTIMATED' END STATUS\r\n"
 			+ "FROM MDMS.MDM_NETWORK_HIERARCHY NET (NOLOCK) INNER JOIN MDMS.MDM_ENERGY_DATA ED (NOLOCK) ON ED.MTR_NUMBER=NET.METER_NUMBER\r\n"
-			+ "AND ED.NETWORK_ID=NET.ID AND ED.BILL_DATE=:billDate AND ED.D_TYPE=1\r\n"
+			+ "AND ED.NETWORK_ID=NET.ID AND ED.BILL_DATE=?1 AND ED.D_TYPE=1\r\n"
 			+ "inner join cdb.meter_master mm(nolock) on mm.mtr_number=net.meter_number and mm.record_status=1\r\n"
-			+ "AND (NET.CONS_TYPE=:consType OR mm.metering_mode=:meteringMode)\r\n"
+			+ "AND (NET.CONS_TYPE=?2 OR mm.metering_mode=?3)\r\n"
 			+ "LEFT OUTER JOIN DWH.NETWORK_AREA_AGGREGATION AG (NOLOCK) ON NET.METER_NUMBER=AG.METER_NUMBER AND AG.METER_NUMBER=ED.MTR_NUMBER\r\n"
-			+ "AND AG.ENE_DATE=:eneDate\r\n"
+			+ "AND AG.ENE_DATE=?4\r\n"
 			+ "AND IS_RECORD_ESTIMATED=CASE WHEN EST_FLAG='ORIGINAL' THEN 0 ELSE 1 END\r\n"
 			//+ "WHERE \"&[WhereClause]&\" \r\n"
-			+ ") M WHERE (STATUS=:status OR 'ALL'=:status)",nativeQuery = true)
+			+ ") M WHERE (STATUS=?5 OR 'ALL'=?5)",nativeQuery = true)
 	List<Object[]> getDailyNetMeteringReport(@Param("billDate") String billDate, @Param("consType") String consType, @Param("meteringMode") String meteringMode , @Param("eneDate") String eneDate , @Param("status") String status);
 
 
