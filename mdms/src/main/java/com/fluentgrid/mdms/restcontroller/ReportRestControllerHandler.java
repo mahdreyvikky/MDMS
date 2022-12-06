@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,18 +18,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fluentgrid.mdms.dto.AlarmReportDto;
 import com.fluentgrid.mdms.dto.AreawiseAggDailyReportDto;
+import com.fluentgrid.mdms.dto.DailyNetMeteringReportDto;
 import com.fluentgrid.mdms.service.AlarmReportService;
 import com.fluentgrid.mdms.service.AreawiseAggregationDailyReportService;
 import com.fluentgrid.mdms.service.MeterReportService;
 import com.fluentgrid.mdms.service.RequestTypeMService;
 import com.fluentgrid.mdms.utils.JsonUtil;
-import com.fluentgrid.mdms.vo.AlarmDetails;
 import com.fluentgrid.mdms.vo.AlarmMaster;
 import com.fluentgrid.mdms.vo.AlarmNotification;
-import com.fluentgrid.mdms.vo.CategoryMaster;
-import com.fluentgrid.mdms.vo.MdmNetworkHierarchy;
-import com.fluentgrid.mdms.vo.OfficeMaster;
-import com.google.gson.Gson;
 
 @RestController
 @RequestMapping("/mdms")
@@ -46,7 +41,7 @@ public class ReportRestControllerHandler {
 
 	@Autowired
 	private AreawiseAggregationDailyReportService areawiseAggregationDailyReportService;
-	
+
 	@Autowired
 	private MeterReportService meterReportService;
 
@@ -100,8 +95,7 @@ public class ReportRestControllerHandler {
 		}
 		return alarmDetails;
 	}
-	
-	
+
 	@SuppressWarnings("unchecked")
 	@PostMapping(value = "/getAlarmReports", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<AlarmReportDto> getAlarmReports(@RequestBody String request) {
@@ -121,7 +115,7 @@ public class ReportRestControllerHandler {
 		}
 		return alarmDetails;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@PostMapping(value = "/getAlarmReportWithoutForeignKeyConstraint", produces = MediaType.APPLICATION_JSON_VALUE)
 	public List<AlarmNotification> getAlarmReportWithoutForeignKeyConstraint(@RequestBody String request) {
@@ -131,20 +125,20 @@ public class ReportRestControllerHandler {
 		try {
 			JSONObject reqJson = null;
 			reqJson = (JSONObject) new JSONParser().parse(request);
-			logger.info("/getAlarmReportWithoutForeignKeyConstraint requster = " + reqJson);			
+			logger.info("/getAlarmReportWithoutForeignKeyConstraint requster = " + reqJson);
 			List<AlarmMaster> alarmReport = alarmReportService.fetchAlarmReport(reqJson.get("alarmName").toString(),
 					reqJson.get("fromDate").toString(), reqJson.get("toDate").toString());
-			
-			logger.info("alarmMasterList size.."+alarmReport.size());
-			if(alarmReport!=null && !alarmReport.isEmpty()) {
-				for(AlarmMaster am : alarmReport) {
+
+			logger.info("alarmMasterList size.." + alarmReport.size());
+			if (alarmReport != null && !alarmReport.isEmpty()) {
+				for (AlarmMaster am : alarmReport) {
 					logger.info(am.getId());
-					logger.info("alarmNotificationList size.."+am.getAlarmNotification().size());
+					logger.info("alarmNotificationList size.." + am.getAlarmNotification().size());
 				}
 				alarmNotification = alarmReport.get(0).getAlarmNotification();
 			}
-			
-			logger.info("getAlarmReportWithoutForeignKeyConstraint size.."+alarmReport);
+
+			logger.info("getAlarmReportWithoutForeignKeyConstraint size.." + alarmReport);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -190,8 +184,8 @@ public class ReportRestControllerHandler {
 		}
 		return responseEntity;
 	}
-	
-	//21st Nov,22
+
+	// 21st Nov,22
 	@SuppressWarnings("unchecked")
 	@PostMapping(value = "/dailyNetMeteringReport", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> dailyNetMeteringReportHandler(@RequestBody String request) {
@@ -205,10 +199,12 @@ public class ReportRestControllerHandler {
 			JSONObject reqJson = null;
 			reqJson = (JSONObject) new JSONParser().parse(request);
 			logger.info("/dailyNetMeteringReport requster = " + reqJson);
-			
-			List<MdmNetworkHierarchy> mnhList = meterReportService.dailyNetMeteringReport();
 
-		
+			List<DailyNetMeteringReportDto> mnhList = meterReportService.dailyNetMeteringReport(
+					reqJson.get("billDate").toString(), reqJson.get("consType").toString(),
+					reqJson.get("meteringMode").toString(), reqJson.get("eneDate").toString(),
+					reqJson.get("status").toString());
+
 			result.put("message", "success");
 			result.put("data", resultant);
 			result.put("responseCode", HttpStatus.OK);

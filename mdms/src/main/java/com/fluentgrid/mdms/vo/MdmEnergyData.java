@@ -42,9 +42,6 @@ public class MdmEnergyData {
 	@Column(name = "VERSION_NUMBER")
 	private String versionNumber;
 
-	@Column(name = "CATEGORY_ID")
-	private String categoryId;
-
 	@Column(name = "D_TYPE")
 	private Integer dType;
 
@@ -188,14 +185,7 @@ public class MdmEnergyData {
 		this.versionNumber = versionNumber;
 	}
 
-	public String getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(String categoryId) {
-		this.categoryId = categoryId;
-	}
-
+	
 	public Integer getdType() {
 		return dType;
 	}

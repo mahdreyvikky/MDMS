@@ -9,6 +9,7 @@ com\fluentgrid\mdms\vo\MeterManufacturer.class
 com\fluentgrid\mdms\vo\MdmThresholdCodeM.class
 com\fluentgrid\mdms\utils\JsonUtil.class
 com\fluentgrid\mdms\MdmsApplication.class
+com\fluentgrid\mdms\vo\MdmEnergyData.class
 com\fluentgrid\mdms\service\RequestTypeMService.class
 com\fluentgrid\mdms\vo\TouDayZoneConfigM.class
 com\fluentgrid\mdms\dao\MdmNetworkHierarchyDao.class
@@ -34,6 +35,7 @@ com\fluentgrid\mdms\vo\MdmMeterConfiguration.class
 com\fluentgrid\mdms\vo\HolidayM.class
 com\fluentgrid\mdms\vo\ConsumerNetworkMapping.class
 com\fluentgrid\mdms\vo\TOUConfM.class
+com\fluentgrid\mdms\service\impl\MeterReportServiceImpl.class
 com\fluentgrid\mdms\service\impl\AlarmReportServiceImpl.class
 com\fluentgrid\mdms\vo\AuthToken.class
 com\fluentgrid\mdms\vo\CommandGroupConfiguration.class
@@ -85,3 +87,4 @@ com\fluentgrid\mdms\dao\AlarmDetailsDao.class
 com\fluentgrid\mdms\utils\SpringPropertiesUtil.class
 com\fluentgrid\mdms\vo\MdmNetworkHierarchy.class
 com\fluentgrid\mdms\controller\MdmsController.class
+com\fluentgrid\mdms\service\MeterReportService.class
